@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DuitKu - Mobile Money Manager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+    }
+  }
+  </script>
+
+  <!-- Ikon Frameworks -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #020617;
+      color: #1E293B;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    #app-shell {
+      background-color: #F8FAFC;
+      width: 100%;
+      max-width: 448px;
+      min-height: 100vh;
+      position: relative;
+      display: flex; flex-direction: column;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.7);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .bottom-sheet { transition: transform 0.3s ease-out; transform: translateY(100%); }
+    .bottom-sheet.active { transform: translateY(0); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .nav-item.active { color: #2563eb; }
+    .nav-item.active .nav-icon-bg { background-color: #eff6ff; }
+    .balance-text { transition: all 0.3s ease; }
+    .balance-hidden { filter: blur(8px); opacity: 0.5; }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <div id="app-shell">
+    
+    <header class="px-6 pt-8 pb-4 flex justify-between items-center sticky top-0 bg-[#F8FAFC]/80 backdrop-blur-md z-30">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg shadow-blue-200">
+          <span>D</span>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">DuitKu App</p>
+          <h1 id="page-title" class="text-lg font-extrabold text-slate-800">Dashboard</h1>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button class="p-2 bg-white rounded-xl shadow-sm border border-slate-100"><i data-lucide="search" class="w-5 h-5 text-slate-400"></i></button>
+        <button class="p-2 bg-white rounded-xl shadow-sm border border-slate-100 relative">
+          <i data-lucide="bell" class="w-5 h-5 text-slate-400"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 px-6 pb-24 overflow-y-auto no-scrollbar">
+      
+      <div id="tab-dashboard" class="tab-content active animate-in fade-in duration-500">
+        <!-- Balance Card -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-[2.5rem] text-white shadow-2xl shadow-slate-200 relative overflow-hidden mb-8">
+          <div class="absolute -right-4 -top-4 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+          
+          <div class="flex justify-between items-start mb-1">
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Total Saldo Bersih</p>
+            <button id="toggle-eye-btn" onclick="toggleBalanceVisibility()" class="text-slate-400 hover:text-white transition-colors p-1">
+              <span id="eye-icon" class="iconify w-5 h-5" data-icon="solar:eye-bold"></span>
+            </button>
+          </div>
+          
+          <h2 id="total-balance-display" class="text-2xl font-black mb-6 tracking-tight balance-text">Rp 0</h2>
+          
+          <div class="flex justify-between items-center bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+            <div class="flex items-center gap-2">
+              <div class="p-1.5 bg-emerald-500/20 text-emerald-400 rounded-lg"><i data-lucide="arrow-down-left" class="w-4 h-4"></i></div>
+              <div>
+                <p class="text-[10px] text-slate-300 font-bold uppercase">Income</p>
+                <p id="total-income-display" class="text-xs font-bold balance-text">Rp 0</p>
+              </div>
+            </div>
+            <div class="w-[1px] h-8 bg-white/10"></div>
+            <div class="flex items-center gap-2">
+              <div class="p-1.5 bg-rose-500/20 text-rose-400 rounded-lg"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></div>
+              <div>
+                <p class="text-[10px] text-slate-300 font-bold uppercase">Expense</p>
+                <p id="total-expense-display" class="text-xs font-bold balance-text">Rp 0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-extrabold text-slate-800">Transaksi Terakhir</h3>
+            <button onclick="window.location.href='history.html'" class="text-slate-400 text-xs font-bold">Semua</button>
+          </div>
+          <div id="recent-list" class="space-y-3"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 px-4 pb-3 pt-1">
+      <div class="glass-effect rounded-[2rem] border border-white/50 shadow-2xl flex justify-between items-center px-3 py-1.5">
+        <button onclick="window.location.reload()" class="nav-item active flex flex-col items-center gap-1 flex-1 transition-all">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="layout-dashboard" class="w-5 h-5"></i></div>
+        </button>
+        <button onclick="window.location.href='history.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="history" class="w-5 h-5"></i></div>
+        </button>
+        <div class="relative -top-7 px-1">
+          <button onclick="toggleModal(true)" class="w-13 h-13 p-3 bg-blue-600 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl shadow-blue-300 border-[3px] border-white active:scale-90 transition-all">
+            <i data-lucide="plus" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <button onclick="window.location.href='reports.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+        </button>
+        <button onclick="window.location.href='profile.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="user" class="w-5 h-5"></i></div>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Modal Form -->
+    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300" onclick="toggleModal(false)"></div>
+    <div id="add-modal" class="bottom-sheet fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white rounded-t-[3rem] shadow-2xl p-8 z-50 overflow-y-auto max-h-[90vh]">
+      <div class="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mb-8"></div>
+      <h3 class="text-2xl font-black text-slate-800 mb-8">Catat Keuangan</h3>
+      <div class="space-y-6">
+        <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
+          <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Nominal (Rp)</label>
+          <input type="number" id="input-amount" placeholder="0" class="w-full text-4xl font-black text-slate-800 bg-transparent outline-none">
+        </div>
+        <button onclick="toggleModal(false)" class="w-full py-5 rounded-[2rem] bg-blue-600 text-white font-black text-lg">Simpan Data</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    window.toggleModal = (s) => {
+      const m = document.getElementById('add-modal');
+      const o = document.getElementById('modal-overlay');
+      if(s) { o.classList.remove('hidden'); setTimeout(() => { o.classList.add('opacity-100'); m.classList.add('active'); }, 10); }
+      else { m.classList.remove('active'); o.classList.remove('opacity-100'); setTimeout(() => o.classList.add('hidden'), 300); }
+    };
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Login - DuitKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; display: flex; justify-content: center; min-height: 100vh; }
+    #app-shell { background-color: #F8FAFC; width: 100%; max-width: 448px; min-height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .input-focus:focus-within { border-color: #2563eb; background-color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); }
+  </style>
+</head>
+<body>
+  <div id="app-shell" class="px-8 pt-20 pb-10">
+    <div class="flex flex-col items-center mb-12">
+      <div class="w-20 h-20 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-[2rem] flex items-center justify-center text-white text-4xl font-black shadow-2xl shadow-blue-200 mb-6 animate-bounce">
+        <span>D</span>
+      </div>
+      <h1 class="text-3xl font-black text-slate-800 tracking-tight">Selamat Datang</h1>
+      <p class="text-slate-400 text-sm font-medium">Kelola keuanganmu via WhatsApp</p>
+    </div>
+
+    <form class="space-y-5" onsubmit="event.preventDefault(); window.location.href='verifikasi.html'">
+      <div class="space-y-1">
+        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Nomor WhatsApp</label>
+        <div class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl input-focus transition-all">
+          <span class="iconify text-xl text-emerald-500" data-icon="logos:whatsapp-icon"></span>
+          <input type="tel" placeholder="081234567xxx" class="bg-transparent outline-none w-full font-semibold text-slate-700 text-sm">
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <div class="flex justify-between items-center px-1">
+          <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Password</label>
+          <a href="#" class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Lupa?</a>
+        </div>
+        <div class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl input-focus transition-all">
+          <i data-lucide="lock" class="w-5 h-5 text-slate-400"></i>
+          <input type="password" placeholder="••••••••" class="bg-transparent outline-none w-full font-semibold text-slate-700 text-sm">
+        </div>
+      </div>
+
+      <button type="submit" class="w-full py-5 bg-blue-600 text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 active:scale-[0.98] transition-all mt-4">
+        Masuk Sekarang
+      </button>
+    </form>
+
+    <div class="mt-8">
+      <div class="relative flex items-center justify-center mb-8">
+        <div class="w-full border-t border-slate-100"></div>
+        <span class="absolute px-4 bg-[#F8FAFC] text-slate-400 text-[10px] font-bold uppercase tracking-widest">Atau masuk dengan</span>
+      </div>
+      <div class="flex gap-4">
+        <button class="flex-1 py-4 border border-slate-100 bg-white rounded-2xl flex items-center justify-center shadow-sm active:scale-95 transition-all">
+          <span class="iconify text-2xl" data-icon="logos:google-icon"></span>
+        </button>
+        <button class="flex-1 py-4 border border-slate-100 bg-white rounded-2xl flex items-center justify-center shadow-sm active:scale-95 transition-all">
+          <span class="iconify text-2xl" data-icon="logos:apple"></span>
+        </button>
+      </div>
+    </div>
+
+    <p class="mt-auto text-center text-sm text-slate-500 font-medium">
+      Belum punya akun? <a href="register.html" class="text-blue-600 font-bold">Daftar Gratis</a>
+    </p>
+  </div>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

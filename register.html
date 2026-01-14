@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Daftar - DuitKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; display: flex; justify-content: center; min-height: 100vh; }
+    #app-shell { background-color: #F8FAFC; width: 100%; max-width: 448px; min-height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .input-focus:focus-within { border-color: #2563eb; background-color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); }
+  </style>
+</head>
+<body>
+  <div id="app-shell" class="px-8 pt-16 pb-10">
+    <div class="mb-10">
+      <button onclick="window.history.back()" class="w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 mb-8 active:scale-90 transition-all">
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <h1 class="text-3xl font-black text-slate-800 tracking-tight">Buat Akun</h1>
+      <p class="text-slate-400 text-sm font-medium">Daftar instan dengan nomor WhatsApp</p>
+    </div>
+
+    <form class="space-y-4" onsubmit="event.preventDefault(); window.location.href='verifikasi.html'">
+      <div class="space-y-1">
+        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Nama Lengkap</label>
+        <div class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl input-focus transition-all">
+          <i data-lucide="user" class="w-5 h-5 text-slate-400"></i>
+          <input type="text" placeholder="Misal: Budi Budiman" class="bg-transparent outline-none w-full font-semibold text-slate-700 text-sm">
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Nomor WhatsApp</label>
+        <div class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl input-focus transition-all">
+          <i data-lucide="phone" class="w-5 h-5 text-slate-400"></i>
+          <input type="tel" placeholder="081234567xxx" class="bg-transparent outline-none w-full font-semibold text-slate-700 text-sm">
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Password</label>
+        <div class="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-2xl input-focus transition-all">
+          <i data-lucide="lock" class="w-5 h-5 text-slate-400"></i>
+          <input type="password" placeholder="Minimal 8 karakter" class="bg-transparent outline-none w-full font-semibold text-slate-700 text-sm">
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 px-1 mt-6">
+        <input type="checkbox" id="terms" class="mt-1 w-4 h-4 rounded border-slate-200 text-blue-600 focus:ring-blue-500">
+        <label for="terms" class="text-xs text-slate-500 leading-relaxed font-medium">
+          Saya setuju dengan <span class="text-blue-600 font-bold">Syarat & Ketentuan</span> dan <span class="text-blue-600 font-bold">Kebijakan Privasi</span> DuitKu.
+        </label>
+      </div>
+
+      <button type="submit" class="w-full py-5 bg-blue-600 text-white font-black rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 active:scale-[0.98] transition-all mt-6">
+        Daftar Sekarang
+      </button>
+    </form>
+
+    <p class="mt-auto text-center text-sm text-slate-500 font-medium">
+      Sudah punya akun? <a href="login.html" class="text-blue-600 font-bold">Login</a>
+    </p>
+  </div>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

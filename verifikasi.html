@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Verifikasi - DuitKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; display: flex; justify-content: center; min-height: 100vh; }
+    #app-shell { background-color: #F8FAFC; width: 100%; max-width: 448px; min-height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .otp-input { background-color: #ffffff; border: 2px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.2s ease; }
+    .otp-input:focus { border-color: #2563eb; background-color: #ffffff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); transform: translateY(-2px); }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+  </style>
+</head>
+<body>
+  <div id="app-shell" class="px-8 pt-16 pb-10">
+    <button onclick="window.history.back()" class="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 mb-12 active:scale-90 transition-all shadow-sm">
+      <i data-lucide="chevron-left" class="w-6 h-6"></i>
+    </button>
+
+    <div class="text-center mb-10">
+      <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-inner border border-emerald-100/50">
+        <span class="iconify text-5xl" data-icon="logos:whatsapp-icon"></span>
+      </div>
+      <h1 class="text-3xl font-black text-slate-800 tracking-tight">Verifikasi OTP</h1>
+      <p class="text-slate-400 text-sm font-medium mt-2 px-6">Kami telah mengirimkan 4 digit kode ke WhatsApp <span class="text-slate-700 font-bold">0812****90</span></p>
+    </div>
+
+    <div class="flex justify-center gap-4 mb-10">
+      <input type="number" maxlength="1" placeholder="-" class="otp-input w-16 h-20 text-center text-3xl font-black text-slate-800 rounded-2xl outline-none" oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1); if(this.value.length === 1) this.nextElementSibling?.focus();">
+      <input type="number" maxlength="1" placeholder="-" class="otp-input w-16 h-20 text-center text-3xl font-black text-slate-800 rounded-2xl outline-none" oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1); if(this.value.length === 1) this.nextElementSibling?.focus();">
+      <input type="number" maxlength="1" placeholder="-" class="otp-input w-16 h-20 text-center text-3xl font-black text-slate-800 rounded-2xl outline-none" oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1); if(this.value.length === 1) this.nextElementSibling?.focus();">
+      <input type="number" maxlength="1" placeholder="-" class="otp-input w-16 h-20 text-center text-3xl font-black text-slate-800 rounded-2xl outline-none" oninput="if(this.value.length > 1) this.value = this.value.slice(0, 1);">
+    </div>
+
+    <button onclick="window.location.href='index.html'" class="w-full py-5 bg-blue-600 text-white font-black rounded-2xl shadow-xl shadow-blue-200 hover:bg-blue-700 active:scale-[0.98] transition-all">
+      Verifikasi Sekarang
+    </button>
+
+    <div class="mt-10 text-center">
+      <p id="timer" class="text-sm font-bold text-slate-400 mb-2 uppercase tracking-widest">Kirim ulang dalam <span class="text-blue-600" id="countdown">00:59</span></p>
+      <button id="resend-btn" class="text-sm font-bold text-slate-300 pointer-events-none transition-colors">Kirim Ulang via WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    document.querySelector('.otp-input').focus();
+    let timeLeft = 59;
+    const countdownEl = document.getElementById('countdown');
+    const timer = setInterval(() => {
+      timeLeft--;
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      if (countdownEl) countdownEl.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById('timer')?.classList.add('hidden');
+        document.getElementById('resend-btn')?.classList.remove('text-slate-300', 'pointer-events-none');
+        document.getElementById('resend-btn')?.classList.add('text-blue-600');
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

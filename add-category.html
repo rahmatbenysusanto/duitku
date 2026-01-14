@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tambah Kategori - DuitKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; display: flex; justify-content: center; min-height: 100vh; }
+    #app-shell { background-color: #F8FAFC; width: 100%; max-width: 448px; min-height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .input-group:focus-within { border-color: #2563eb; background-color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); }
+    .type-radio:checked + label { background-color: white; color: #1e293b; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: transparent; }
+    .icon-option.selected { border-color: #2563eb; background-color: #eff6ff; color: #2563eb; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body>
+  <div id="app-shell">
+    <header class="px-6 pt-8 pb-4 flex items-center justify-between sticky top-0 bg-[#F8FAFC]/90 backdrop-blur-md z-30">
+      <div class="flex items-center gap-4">
+        <button onclick="window.history.back()" class="w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 active:scale-90 transition-all shadow-sm">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <h1 class="text-xl font-black text-slate-800 tracking-tight">Tambah Kategori</h1>
+      </div>
+    </header>
+
+    <main class="flex-1 px-6 pb-12 overflow-y-auto no-scrollbar">
+      <form class="mt-6 space-y-6">
+        
+        <!-- Type Selection -->
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Tipe Transaksi</label>
+          <div class="bg-slate-100 p-1.5 rounded-2xl flex gap-1">
+            <div class="flex-1 relative">
+              <input type="radio" name="type" id="type-expense" value="expense" class="type-radio hidden" checked>
+              <label for="type-expense" class="block text-center py-3 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400 transition-all cursor-pointer border border-transparent">Pengeluaran</label>
+            </div>
+            <div class="flex-1 relative">
+              <input type="radio" name="type" id="type-income" value="income" class="type-radio hidden">
+              <label for="type-income" class="block text-center py-3 rounded-xl text-xs font-black uppercase tracking-widest text-slate-400 transition-all cursor-pointer border border-transparent">Pemasukan</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Name -->
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Kategori</label>
+          <div class="input-group flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 rounded-[1.5rem] transition-all">
+            <i data-lucide="tag" class="w-5 h-5 text-slate-400"></i>
+            <input type="text" placeholder="Misal: Hiburan" class="bg-transparent outline-none w-full font-bold text-slate-700 text-sm">
+          </div>
+        </div>
+
+        <!-- Icon Selector -->
+        <div class="space-y-1.5">
+          <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Pilih Ikon</label>
+          <div class="grid grid-cols-4 gap-3 bg-white p-4 rounded-[2rem] border border-slate-100">
+            <button type="button" class="icon-option selected w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="utensils" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="car" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="home" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="coffee" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="tv" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="gift" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="heart" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="trending-up" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="banknote" class="w-6 h-6"></i>
+            </button>
+            <button type="button" class="icon-option w-full aspect-square border-2 border-slate-50 rounded-2xl flex items-center justify-center transition-all active:scale-90" onclick="selectIcon(this)">
+              <i data-lucide="piggy-bank" class="w-6 h-6"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" onclick="window.location.href='categories.html'" class="w-full py-5 bg-blue-600 text-white font-black rounded-[2rem] shadow-xl shadow-blue-100 active:scale-95 transition-all mt-4">
+          Simpan Kategori
+        </button>
+
+      </form>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    function selectIcon(el) {
+      document.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+  </script>
+</body>
+</html>

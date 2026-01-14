@@ -1,0 +1,7 @@
+{
+  "name": "DuitKu - Smart Money Manager",
+  "description": "A comprehensive personal finance tracker with multi-wallet support (BCA, Mandiri, BRI, etc.), transaction management, visual analytics, and AI-powered financial insights using Gemini.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

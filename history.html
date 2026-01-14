@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Riwayat - DuitKu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; display: flex; justify-content: center; min-height: 100vh; }
+    #app-shell { background-color: #F8FAFC; width: 100%; max-width: 448px; min-height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .glass-effect { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    .nav-item.active { color: #2563eb; }
+    .nav-item.active .nav-icon-bg { background-color: #eff6ff; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body>
+  <div id="app-shell">
+    <header class="px-6 pt-8 pb-4 flex items-center justify-between sticky top-0 bg-[#F8FAFC]/90 backdrop-blur-md z-30">
+      <div class="flex items-center gap-4">
+        <button onclick="window.location.href='index.html'" class="w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <h1 class="text-xl font-black text-slate-800">Riwayat</h1>
+      </div>
+    </header>
+
+    <main class="flex-1 px-6 pb-28 overflow-y-auto no-scrollbar">
+      <div id="history-container" class="space-y-8 mt-6"></div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 px-4 pb-3 pt-1">
+      <div class="glass-effect rounded-[2rem] border border-white/50 shadow-2xl flex justify-between items-center px-3 py-1.5">
+        <button onclick="window.location.href='index.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="layout-dashboard" class="w-5 h-5"></i></div>
+        </button>
+        <button onclick="window.location.reload()" class="nav-item active flex flex-col items-center gap-1 flex-1 transition-all">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="history" class="w-5 h-5"></i></div>
+        </button>
+        <div class="relative -top-7 px-1">
+          <button onclick="window.location.href='index.html'" class="w-13 h-13 p-3 bg-blue-600 rounded-[1.5rem] flex items-center justify-center text-white shadow-2xl shadow-blue-300 border-[3px] border-white active:scale-90 transition-all">
+            <i data-lucide="plus" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <button onclick="window.location.href='reports.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="bar-chart-2" class="w-5 h-5"></i></div>
+        </button>
+        <button onclick="window.location.href='profile.html'" class="nav-item flex flex-col items-center gap-1 flex-1 transition-all text-slate-300">
+          <div class="nav-icon-bg p-2 rounded-xl"><i data-lucide="user" class="w-5 h-5"></i></div>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
